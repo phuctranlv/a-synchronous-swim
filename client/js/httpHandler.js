@@ -6,23 +6,29 @@ console.log('hello');
   //
   // TODO: build the swim command fetcher here
   // $.get(serverUrl, (data) => console.log(data));
-  $.get( "http://127.0.0.1:3000", function( data ) {
-   console.log(data);
-  });
-  // $.ajax({
-  //   type: 'GET',
-  //   // data: formData,
-  //   url: serverUrl,
-  //   cache: false,
-  //   contentType: false,
-  //   processData: false,
-  //   success: (data) => {
-  //     // reload the page
-  //     // window.location = window.location.href;
-  //     console.log(data);
-  //   }
+  // $.get( "http://127.0.0.1:3000", function( data ) {
+  //  console.log(data);
   // });
-  //
+  var repeatGetRequest = function () {
+    $.ajax({
+      type: 'GET',
+      // data: formData,
+      url: serverUrl,
+      cache: false,
+      contentType: false,
+      processData: false,
+      success: (data) => {
+        // reload the page
+        // window.location = window.location.href;
+        console.log(data);
+        SwimTeam.move(data);
+        setTimeout(repeatGetRequest, 1000);
+      }
+    });
+  }
+  repeatGetRequest();
+
+
 
   /////////////////////////////////////////////////////////////////////
   // The ajax file uplaoder is provided for your convenience!
