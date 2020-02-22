@@ -28,7 +28,7 @@ describe('server responses', () => {
     httpHandler.router(req, res);
     expect(res._responseCode).to.equal(200);
     expect(res._ended).to.equal(true);
-    expect(['up', 'down', 'left', 'right']).to.contains(res._data.toString());
+    expect(res._data.toString()).to.equal('default value');
 
     done();
   });

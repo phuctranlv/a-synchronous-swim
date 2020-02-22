@@ -7,10 +7,13 @@ const multipart = require('./multipartUtils');
 module.exports.backgroundImageFile = path.join('.', 'background.jpg');
 ////////////////////////////////////////////////////////
 
-let messageQueue = null;
+let messageQueue = require('./messageQueue');
+// console.log(messageQueue.messages);
 module.exports.initialize = (queue) => {
   messageQueue = queue;
 };
+
+// const keypressInput = require('./keypressHandler');
 
 module.exports.router = (req, res, next = ()=>{}) => {
   console.log('Serving request type ' + req.method + ' for url ' + req.url);
@@ -20,7 +23,10 @@ module.exports.router = (req, res, next = ()=>{}) => {
   if (req.method === 'OPTIONS') {
     res.end();
   } else {
-    res.end(commands[index]);
+    // console.log('the data from the server:', )
+    console.log('router dequeueing');
+    var returnValue = messageQueue.dequeue() || 'default value';
+    res.end(returnValue);
   }
 
   next(); // invoke next() at the end of a request to help with testing!

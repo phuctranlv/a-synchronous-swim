@@ -14,9 +14,9 @@ console.log('hello');
       type: 'GET',
       // data: formData,
       url: serverUrl,
-      cache: false,
-      contentType: false,
-      processData: false,
+      // cache: false,
+      // contentType: false,
+      // processData: false,
       success: (data) => {
         // reload the page
         // window.location = window.location.href;
